@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: trivial_compression.py
 #    Created:       <2019/06/13 20:47:40>
-#    Last Modified: <2019/06/14 21:25:40>
+#    Last Modified: <2019/06/15 17:43:50>
 
 class CompressedGene:
     def __init__(self, gene: str) -> None:
@@ -41,3 +41,12 @@ class CompressedGene:
 
     def __str__(self) -> str: # string representation for pretty printing
         return self.decompress()
+
+if __name__ == "__main__":
+    from sys import getsizeof
+    original: str = "TAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATATAGGGATTAACCGTTATATATATATAGCCATGGATCGATTATA" * 100
+    print("original is {} bytes".format(getsizeof(original)))
+    compressed: CompressedGene = CompressedGene(original) # compress
+    print("compressed is {} bytes".format(getsizeof(compressed.bit_string)))
+    print(compressed) # decompress
+    print("original and decompressed are the same: {}".format(original == compressed.decompress()))
