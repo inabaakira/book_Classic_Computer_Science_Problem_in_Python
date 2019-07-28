@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: unbreakable_encryption.py
 #    Created:       <2019/07/25 00:51:35>
-#    Last Modified: <2019/07/28 11:22:29>
+#    Last Modified: <2019/07/28 14:12:04>
 
 from secrets import token_bytes
 from typing import Tuple
@@ -25,3 +25,7 @@ def decrypt(key1: int, key2: int) -> str:
     temp: bytes = decrypted.to_bytes((decrypted.bit_length() + 7) // 8, "big")
     return temp.decode()
 
+if __name__ == "__main__":
+    key1, key2 = encrypt("One Time Pad!")
+    result: str = decrypt(key1, key2)
+    print(result)
