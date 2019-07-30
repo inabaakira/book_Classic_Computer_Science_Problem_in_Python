@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: hanoi.py
 #    Created:       <2019/07/28 20:07:50>
-#    Last Modified: <2019/07/30 20:24:12>
+#    Last Modified: <2019/07/30 20:27:01>
 
 from typing import TypeVar, Generic, List
 T = TypeVar('T')
@@ -35,3 +35,9 @@ def hanoi(begin: Stack[int], end: Stack[int], temp: Stack[int], n: int) -> None:
         hanoi(begin, temp, end, n - 1)
         hanoi(begin, end, temp, 1)
         hanoi(temp, end, begin, n - 1)
+
+if __name__ == "__main__":
+    hanoi(tower_a, tower_c, tower_b, num_discs)
+    print(tower_a)
+    print(tower_b)
+    print(tower_c)
