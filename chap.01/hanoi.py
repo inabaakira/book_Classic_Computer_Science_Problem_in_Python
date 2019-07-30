@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: hanoi.py
 #    Created:       <2019/07/28 20:07:50>
-#    Last Modified: <2019/07/30 20:21:49>
+#    Last Modified: <2019/07/30 20:24:12>
 
 from typing import TypeVar, Generic, List
 T = TypeVar('T')
@@ -27,3 +27,11 @@ tower_b: Stack[int] = Stack()
 tower_c: Stack[int] = Stack()
 for i in range(1, num_discs + 1):
     tower_a.push(i)
+
+def hanoi(begin: Stack[int], end: Stack[int], temp: Stack[int], n: int) -> None:
+    if n == 1:
+        end.push(begin.pop())
+    else:
+        hanoi(begin, temp, end, n - 1)
+        hanoi(begin, end, temp, 1)
+        hanoi(temp, end, begin, n - 1)
