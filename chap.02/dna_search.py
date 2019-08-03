@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: dna_search.py
 #    Created:       <2019/07/31 20:40:40>
-#    Last Modified: <2019/08/03 10:30:22>
+#    Last Modified: <2019/08/03 18:07:29>
 
 from enum import IntEnum
 from typing import Tuple, List
@@ -22,3 +22,5 @@ def string_to_gene(s: str) -> Gene:
         codon: Codon = (Nucleotide[s[i]], Nucleotide[s[i + 1]], Nucleotide[s[i + 2]])
         gene.append(codon) # add codon to gene
     return gene
+
+my_gene: Gene = string_to_gene(gene_str)
