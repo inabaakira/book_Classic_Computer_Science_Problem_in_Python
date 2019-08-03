@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: dna_search.py
 #    Created:       <2019/07/31 20:40:40>
-#    Last Modified: <2019/08/03 18:07:29>
+#    Last Modified: <2019/08/03 21:34:42>
 
 from enum import IntEnum
 from typing import Tuple, List
@@ -24,3 +24,14 @@ def string_to_gene(s: str) -> Gene:
     return gene
 
 my_gene: Gene = string_to_gene(gene_str)
+
+def linear_contains(gene: Gene, key_codon: Codon) -> bool:
+    for codon in gene:
+        if codon == key_codon:
+            return True
+    return False
+
+acg: Codon = (Nucleotide.A, Nucleotide.C, Nucleotide.G)
+gat: Codon = (Nucleotide.G, Nucleotide.A, Nucleotide.T)
+print(linear_contains(my_gene, acg)) # True
+print(linear_contains(my_gene, gat)) # False
