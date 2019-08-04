@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: dna_search.py
 #    Created:       <2019/07/31 20:40:40>
-#    Last Modified: <2019/08/04 17:15:27>
+#    Last Modified: <2019/08/04 17:17:29>
 
 from enum import IntEnum
 from typing import Tuple, List
@@ -49,3 +49,6 @@ def binary_contains(gene: Gene, key_codon: Codon) -> bool:
             return True
     return False
 
+my_sorted_gene: Gene = sorted(my_gene)
+print(binary_contains(my_sorted_gene, acg)) # True
+print(binary_contains(my_sorted_gene, gat)) # False
