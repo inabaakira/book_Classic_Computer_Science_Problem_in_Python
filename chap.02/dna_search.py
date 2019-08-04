@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: dna_search.py
 #    Created:       <2019/07/31 20:40:40>
-#    Last Modified: <2019/08/03 21:34:42>
+#    Last Modified: <2019/08/04 17:15:27>
 
 from enum import IntEnum
 from typing import Tuple, List
@@ -35,3 +35,17 @@ acg: Codon = (Nucleotide.A, Nucleotide.C, Nucleotide.G)
 gat: Codon = (Nucleotide.G, Nucleotide.A, Nucleotide.T)
 print(linear_contains(my_gene, acg)) # True
 print(linear_contains(my_gene, gat)) # False
+
+def binary_contains(gene: Gene, key_codon: Codon) -> bool:
+    low: int = 0
+    high: int = len(gene) - 1
+    while low <= high: # while there is still a search space
+        mid: int = (low + high) // 2
+        if gene[mid] < key_codon:
+            low = mid + 1
+        elif gene[mid] > key_codon:
+            high = mid - 1
+        else:
+            return True
+    return False
+
