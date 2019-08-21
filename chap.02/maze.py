@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/08/21 18:06:23>
+#    Last Modified: <2019/08/21 20:58:24>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -50,6 +50,9 @@ class Maze:
         for row in self._grid:
             output += "".join([c.value for c in row]) + "\n"
         return output
+
+    def goal_test(self, ml: MazeLocation) -> bool:
+        return ml == self.goal
 
 maze: Maze = Maze()
 print(maze)
