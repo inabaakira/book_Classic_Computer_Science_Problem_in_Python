@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/08/21 17:26:24>
+#    Last Modified: <2019/08/21 18:06:23>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -44,3 +44,12 @@ class Maze:
                 if random.uniform(0, 1.0) < sparseness:
                     self._grid[row][column] = Cell.BLOCKED
 
+    # return a nicely formatted version of the maze for printing
+    def __str__(self) -> str:
+        output: str = ""
+        for row in self._grid:
+            output += "".join([c.value for c in row]) + "\n"
+        return output
+
+maze: Maze = Maze()
+print(maze)
