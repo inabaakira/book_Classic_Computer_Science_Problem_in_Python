@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/08/21 17:18:29>
+#    Last Modified: <2019/08/21 17:26:24>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -16,3 +16,7 @@ class Cell(str, Enum):
     START = "S"
     GOAL = "G"
     PATH = "*"
+
+class MazeLocation(NamedTuple):
+    row: int
+    column: int
