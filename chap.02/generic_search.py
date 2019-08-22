@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2019/08/05 14:58:30>
+#    Last Modified: <2019/08/22 17:49:30>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -34,6 +34,23 @@ class Comparable(Protocol):
 
     def __ge__(self: C, other: C) -> bool:
         return not self < other
+
+class Stack(Generic[T]):
+    def __init__(self) -> None:
+        self._container: List[T] = []
+
+    @property
+    def empty(self) -> bool:
+        return not self._container # not is true for empty container
+
+    def push(self, item: T) -> None:
+        return self._container.append(item)
+
+    def pop(self) -> T:
+        return self._container.pop() # LIFO
+
+    def __repr__(self) -> str:
+        return repr(self._container)
 
 def binary_contains(sequence: Sequence[C], key: C) -> bool:
     low: int = 0
