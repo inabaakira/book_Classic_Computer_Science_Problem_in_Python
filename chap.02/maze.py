@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/08/21 20:58:24>
+#    Last Modified: <2019/08/22 17:42:08>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -53,6 +53,22 @@ class Maze:
 
     def goal_test(self, ml: MazeLocation) -> bool:
         return ml == self.goal
+
+    def successors(self, ml: MazeLocation) -> List[MazeLocation]:
+        locations: List[:MazeLocation] = []
+        if ml.row + 1 < self._rows \
+           and self._grid[ml.row + 1][ml.column] != Cell.BLOCKED:
+            locations.append(MazeLocation(ml.row + 1, ml.column))
+        if ml.row - 1 >= 0 \
+           and self._grid[ml.row - 1, ml.column] != Cell.BLOCKED:
+            locations.append(MazeLocation(ml.row - 1, ml.column))
+        if ml.column + 1 < self._columns \
+           and self._grid[ml.row][ml.column + 1] != Cell.BLOCKED:
+            locations.append(MazeLocation(ml.row, ml.column + 1))
+        if ml.column - 1 >= 0 \
+           and self._grid[ml.row][ml.column - 1]:
+            locations.append(MazeLocation(ml.row, ml.column - 1))
+        return locations
 
 maze: Maze = Maze()
 print(maze)
