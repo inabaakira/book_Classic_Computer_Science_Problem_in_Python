@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2019/08/22 17:49:30>
+#    Last Modified: <2019/08/22 21:14:14>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -51,6 +51,17 @@ class Stack(Generic[T]):
 
     def __repr__(self) -> str:
         return repr(self._container)
+
+class Node(Generic[T]):
+    def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
+                 heuristic: float = 0.0 ) -> None:
+        self.state: T = state
+        self.parent: Optional[Node] = parent
+        self.cost: float = cost
+        self.heuristic: float = heuristic
+
+    def __lt__(self, other: Node) -> bool:
+        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
 
 def binary_contains(sequence: Sequence[C], key: C) -> bool:
     low: int = 0
