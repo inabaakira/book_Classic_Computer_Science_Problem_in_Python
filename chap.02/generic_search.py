@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2019/11/27 11:04:06>
+#    Last Modified: <2019/11/27 13:38:56>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -98,6 +98,15 @@ def dfs(initial: T, goal_test: Callable[[T], bool],
             explored.add(child)
             frontier.push(Node(child, current_node))
     return None # went through everything and never found goal
+
+def node_to_path(node: Node[T]) -> List[T]:
+    path: List[T] = [node.state]
+    # work backwards from end to front
+    while node.parent is not None:
+        node = node.parent
+        path.append(node.state)
+    path.reverse()
+    return path
 
 if __name__ == "__main__":
     print(linear_contains([1, 5, 15, 15, 15, 15, 20], 5)) # True
