@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/08/22 17:42:08>
+#    Last Modified: <2019/12/09 09:47:34>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -69,6 +69,18 @@ class Maze:
            and self._grid[ml.row][ml.column - 1]:
             locations.append(MazeLocation(ml.row, ml.column - 1))
         return locations
+
+    def mark(self, path: List[MazeLocation]):
+        for maze_location in path:
+            self._grid[maze_location.row][maze_location.column] = Cell.PATH
+        self._grid[self.start.row][self.start.column] = Cell.START
+        self._grid[self.goal.row][self.goal.column] = Cell.GOAL
+
+    def clear(self, path: List[MazeLocation]):
+        for maze_location in path:
+            self._grid[maze_location.row][maze_location.column] = Cell.EMPTY
+        self._grid[self.start.row][self.start.column] = Cell.START
+        self._grid[self.goal.row][self.goal.column] = Cell.GOAL
 
 maze: Maze = Maze()
 print(maze)
