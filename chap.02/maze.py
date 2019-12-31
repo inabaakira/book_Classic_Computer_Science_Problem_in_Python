@@ -2,13 +2,14 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2019/12/09 09:47:34>
+#    Last Modified: <2019/12/31 22:10:56>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
 import random
 from math import sqrt
 # from generic_search import dfs, bfs, node_to_path, astar, Node
+from generic_search import dfs, node_to_path, Node
 
 class Cell(str, Enum):
     EMPTY = " "
@@ -82,5 +83,16 @@ class Maze:
         self._grid[self.start.row][self.start.column] = Cell.START
         self._grid[self.goal.row][self.goal.column] = Cell.GOAL
 
-maze: Maze = Maze()
-print(maze)
+if __name__ == "__main__":
+    # Test DFS
+    m: Maze = Maze()
+    print(m)
+    solution1: Optional[Node[MazeLocation]] \
+        = dfs(m.start, m.goal_test, m.successors)
+    if solution1 is None:
+        print("No solution found using depth-first search!")
+    else:
+        path1: List[MazeLocation] = node_to_path(solution1)
+        m.mark(path1)
+        print(m)
+        m.clear(path1)
