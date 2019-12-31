@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2019/11/27 13:38:56>
+#    Last Modified: <2020/01/01 01:56:54>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -35,6 +35,34 @@ class Comparable(Protocol):
     def __ge__(self: C, other: C) -> bool:
         return not self < other
 
+class Node(Generic[T]):
+    def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
+                 heuristic: float = 0.0 ) -> None:
+        self.state: T = state
+        self.parent: Optional[Node] = parent
+        self.cost: float = cost
+        self.heuristic: float = heuristic
+
+    def __lt__(self, other: Node) -> bool:
+        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
+
+class Queue(Generic[T]):
+    def __init__(self) -> None:
+        self._container: Deque[T] = Deque()
+
+    @property
+    def empty(self) -> bool:
+        return not self._container # not is true for empty container
+
+    def push(self, item: T) -> None:
+        self._container.append(item)
+
+    def pop(self) -> T:
+        return self._container.popleft() # FIFO
+
+    def __repr__(self) -> str:
+        return repr(self._container)
+
 class Stack(Generic[T]):
     def __init__(self) -> None:
         self._container: List[T] = []
@@ -51,17 +79,6 @@ class Stack(Generic[T]):
 
     def __repr__(self) -> str:
         return repr(self._container)
-
-class Node(Generic[T]):
-    def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
-                 heuristic: float = 0.0 ) -> None:
-        self.state: T = state
-        self.parent: Optional[Node] = parent
-        self.cost: float = cost
-        self.heuristic: float = heuristic
-
-    def __lt__(self, other: Node) -> bool:
-        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
 
 def binary_contains(sequence: Sequence[C], key: C) -> bool:
     low: int = 0
