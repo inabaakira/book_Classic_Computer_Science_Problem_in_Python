@@ -60,13 +60,13 @@ class Maze:
            and self._grid[ml.row + 1][ml.column] != Cell.BLOCKED:
             locations.append(MazeLocation(ml.row + 1, ml.column))
         if ml.row - 1 >= 0 \
-           and self._grid[ml.row - 1, ml.column] != Cell.BLOCKED:
+           and self._grid[ml.row - 1][ml.column] != Cell.BLOCKED:
             locations.append(MazeLocation(ml.row - 1, ml.column))
         if ml.column + 1 < self._columns \
            and self._grid[ml.row][ml.column + 1] != Cell.BLOCKED:
             locations.append(MazeLocation(ml.row, ml.column + 1))
         if ml.column - 1 >= 0 \
-           and self._grid[ml.row][ml.column - 1]:
+           and self._grid[ml.row][ml.column - 1] != Cell.BLOCKED:
             locations.append(MazeLocation(ml.row, ml.column - 1))
         return locations
 
