@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2020/01/01 01:56:54>
+#    Last Modified: <2020/01/01 14:46:22>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -79,6 +79,28 @@ class Stack(Generic[T]):
 
     def __repr__(self) -> str:
         return repr(self._container)
+
+def bfs(initial: T, goal_test: Callable[[T], bool],
+        successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
+    # frontier is where we've yest to go
+    frontier: Queue[Node[T]] = Queue()
+    frontier.push(Node(initial, None))
+    explored: Set[T] = {initial}
+
+    # keep going while there is more to explore
+    while not frontier.empty:
+        current_node: Node[T] = frontier.pop()
+        current_state: T = current_node.state
+        # if we found the goal, we're done
+        if goal_test(current_state):
+            return current_node
+        # check where we can go next and haven't explored
+        for child in successors(current_state):
+            if child in explored: # skip children we already explored
+                continue
+            explored.add(child)
+            frontier.push(Node(child, current_node))
+    return None # went through everything and never found goal
 
 def binary_contains(sequence: Sequence[C], key: C) -> bool:
     low: int = 0
