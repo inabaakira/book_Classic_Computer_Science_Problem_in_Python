@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2020/01/01 14:46:22>
+#    Last Modified: <2020/01/01 23:13:35>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -34,6 +34,23 @@ class Comparable(Protocol):
 
     def __ge__(self: C, other: C) -> bool:
         return not self < other
+
+class PriorityQueue(Generic[T]):
+    def __init__(self) -> None:
+        self._container: List[T] = []
+
+    @property
+    def empty(self) -> bool:
+        return not self._container # not is true for empty container
+
+    def push(self, item: T) -> None:
+        heappush(self._container, item) # in by priority
+
+    def pop(self) -> T:
+        return heappop(self._container) # out by priority
+
+    def __repr__(self) -> str:
+        return repr(self._container)
 
 class Node(Generic[T]):
     def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
