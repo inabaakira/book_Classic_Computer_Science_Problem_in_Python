@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2020/01/04 11:38:01>
+#    Last Modified: <2020/01/05 01:10:46>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -61,6 +61,13 @@ class Maze:
 
     def goal_test(self, ml: MazeLocation) -> bool:
         return ml == self.goal
+
+    def manhattan_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
+        def distance(ml: MazeLocation) -> float:
+            xdist: int = abs(ml.column - goal.column)
+            ydist: int = abs(ml.row - goal.row)
+            return (xdist + ydist)
+        return distance
 
     def successors(self, ml: MazeLocation) -> List[MazeLocation]:
         locations: List[:MazeLocation] = []
