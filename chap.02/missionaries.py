@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: missionaries.py
 #    Created:       <2020/01/06 15:27:01>
-#    Last Modified: <2020/01/06 17:40:01>
+#    Last Modified: <2020/01/06 18:19:20>
 
 from __future__ import annotations
 from typing import List, Optional
@@ -78,3 +78,13 @@ def display_solution(path: List[MCState]):
                           old_state.wc - current_state.wc))
         print(current_state)
         old_state = current_state
+
+if __name__ == "__main__":
+    start: MCState = MCState(MAX_NUM, MAX_NUM, True)
+    solution: Optional[Node[MCState]] \
+        = bfs(start, MCState.goal_test, MCState.successors)
+    if solution is None:
+        print("No solution found")
+    else:
+        path: List[MCState] = node_to_path(solution)
+        display_solution(path)
