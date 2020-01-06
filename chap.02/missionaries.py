@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: missionaries.py
 #    Created:       <2020/01/06 15:27:01>
-#    Last Modified: <2020/01/06 16:31:51>
+#    Last Modified: <2020/01/06 16:58:58>
 
 from __future__ import annotations
 from typing import List, Optional
@@ -35,3 +35,29 @@ class MCState:
         if self.em < self.ec and self.em > 0:
             return False
         return True
+
+    def successors(self) -> List[MCState]:
+        sucs: List[MCState] = []
+        if self.boat: # boat on west bank
+            if self.wm > 1:
+                sucs.append(MCState(self.wm - 2, self.wc, not self.boat))
+            if self.wm > 0:
+                sucs.append(MCState(self.wm - 1, self.wc, not self.boat))
+            if self.wc > 1:
+                sucs.append(MCState(self.wm, self.wc - 2, not self.boat))
+            if self.wc > 0:
+                sucs.append(MCState(self.wm, self.wc - 1, not self.boat))
+            if (self.wm > 0 ) and (self.wc > 0):
+                sucs.append(MCState(self.wm - 1, self.wc - 1, not self.boat))
+        else: # boat on east bank
+            if self.em > 1:
+                sucs.append(MCState(self.wm + 2, self.wc, not self.boat))
+            if self.em > 0:
+                sucs.append(MCState(self.wm + 1, self.wc, not self.boat))
+            if self.ec > 1:
+                sucs.append(MCState(self.wm, self.wc + 2, not self.boat))
+            if self.ec > 0:
+                sucs.append(MCState(self.wm, self.wc + 1, not self.boat))
+            if (self.em > 0) and (self.ec > 0):
+                sucs.append(MCState(self.wm + 1, self.wc + 1, not self.boat))
+        return [x for x in sucs if x.is_legal]
