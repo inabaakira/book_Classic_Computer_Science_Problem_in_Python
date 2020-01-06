@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2020/01/01 23:13:35>
+#    Last Modified: <2020/01/06 13:59:41>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -96,6 +96,32 @@ class Stack(Generic[T]):
 
     def __repr__(self) -> str:
         return repr(self._container)
+
+def aster(initial: T,
+          goal_test: Callable[[T], bool],
+          successors: Callable[[T], List[T]],
+          heuristic: Callable[[T], float]) -> Optional[Node[T]]:
+    # frontier is where we've yet to go
+    frontier: PriorityQueue[Node[T]] = PriorityQueue()
+    frontier.push(Node(initial, None, 0.0, heuristic(initial)))
+    # explored is where we've been
+    explored: Dict[T, float] = {initial: 0.0}
+
+    # keep going while there is more to explore
+    while not frontier.empty:
+        current_node: Node[T] = frontier.pop()
+        current_state: T = current_node.state
+        # if we found the goal, we're done
+        if goal_test(current_state):
+            return current_node
+        # checke where we can go next and haven't explored
+        for child in successors(current_state):
+            # 1 assumes a grid, need a cost function for more sophisticated apps
+            new_cost: float = current_node.cost + 1
+            if child not in explored or explored[child] > new_cost:
+                explored[child] = new_cost
+                frontier.push(Node(child, current_node, new_cost, heuristic(chile)))
+    return None # went through everything and never found goal
 
 def bfs(initial: T, goal_test: Callable[[T], bool],
         successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
