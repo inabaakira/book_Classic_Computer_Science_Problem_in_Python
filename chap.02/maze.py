@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: maze.py
 #    Created:       <2019/08/21 17:09:42>
-#    Last Modified: <2020/01/05 01:10:46>
+#    Last Modified: <2020/01/06 14:01:30>
 
 from enum import Enum
 from typing import List, NamedTuple, Callable, Optional
@@ -52,7 +52,7 @@ class Maze:
             output += "".join([c.value for c in row]) + "\n"
         return output
 
-    def euclidean_distance(goal: MazeLocation) -> Callable([MazeLocation], float):
+    def euclidean_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
         def distance(ml: MazeLocation) -> float:
             xdist: int = ml.column - goal.column
             ydist: int = ml.row - goal.row
