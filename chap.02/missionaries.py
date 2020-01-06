@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: missionaries.py
 #    Created:       <2020/01/06 15:27:01>
-#    Last Modified: <2020/01/06 16:58:58>
+#    Last Modified: <2020/01/06 17:40:01>
 
 from __future__ import annotations
 from typing import List, Optional
@@ -61,3 +61,20 @@ class MCState:
             if (self.em > 0) and (self.ec > 0):
                 sucs.append(MCState(self.wm + 1, self.wc + 1, not self.boat))
         return [x for x in sucs if x.is_legal]
+
+def display_solution(path: List[MCState]):
+    if len(path) == 0: # sanity check
+        return
+    old_state: MCState = path[0]
+    print(old_state)
+    for current_state in path[1:]:
+        if current_state.boat:
+            print("{} missionaries and {} cannibals moved from the east bank to the west bank.\n"
+                  .format(old_state.em - current_state.em,
+                          old_state.ec - current_state.ec))
+        else:
+            print("{} missionaries and {} cannibals moved from the west bank to the east bank.\n"
+                  .format(old_state.wm - current_state.wm,
+                          old_state.wc - current_state.wc))
+        print(current_state)
+        old_state = current_state
