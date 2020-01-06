@@ -14,8 +14,8 @@ class MCState:
     def __init__(self, missionaries: int, cannibals: int, boat: bool) -> None:
         self.wm: int = missionaries # west bank missionaries
         self.wc: int = cannibals # west bank cannibals
-        self.em: int = MAX_NUM # east bank missonaries
-        self.ec: int = MAX_NUM # east bank cannibals
+        self.em: int = MAX_NUM - self.wm # east bank missonaries
+        self.ec: int = MAX_NUM - self.wc # east bank cannibals
         self.boat: bool = boat
 
     def __str__(self) -> str:
