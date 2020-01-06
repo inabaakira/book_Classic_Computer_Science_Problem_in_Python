@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: missionaries.py
 #    Created:       <2020/01/06 15:27:01>
-#    Last Modified: <2020/01/06 16:29:01>
+#    Last Modified: <2020/01/06 16:31:15>
 
 from __future__ import annotations
 from typing import List, Optional
@@ -24,3 +24,6 @@ class MCState:
                 "The boat is on the {} bank.")\
                 .format(self.wm, self.wc, self.em, self.ec,
                         ("west" if self.boat else "east"))
+
+    def goal_test(self) -> bool:
+        return self.is_legal and self.em == MAX_NUM and self.ec == MAX_NUM
