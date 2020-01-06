@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: generic_search.py
 #    Created:       <2019/08/05 14:33:37>
-#    Last Modified: <2020/01/06 13:59:41>
+#    Last Modified: <2020/01/06 14:20:36>
 
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, \
@@ -97,7 +97,7 @@ class Stack(Generic[T]):
     def __repr__(self) -> str:
         return repr(self._container)
 
-def aster(initial: T,
+def astar(initial: T,
           goal_test: Callable[[T], bool],
           successors: Callable[[T], List[T]],
           heuristic: Callable[[T], float]) -> Optional[Node[T]]:
@@ -120,7 +120,7 @@ def aster(initial: T,
             new_cost: float = current_node.cost + 1
             if child not in explored or explored[child] > new_cost:
                 explored[child] = new_cost
-                frontier.push(Node(child, current_node, new_cost, heuristic(chile)))
+                frontier.push(Node(child, current_node, new_cost, heuristic(child)))
     return None # went through everything and never found goal
 
 def bfs(initial: T, goal_test: Callable[[T], bool],
