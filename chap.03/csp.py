@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: csp.py
 #    Created:       <2020/10/07 17:43:35>
-#    Last Modified: <2020/10/09 11:45:15>
+#    Last Modified: <2020/10/14 18:13:02>
 
 from typing import Generic, TypeVar, Dict, List, Optional
 from abc import ABC, abstractmethod
@@ -41,3 +41,18 @@ class CSP(Generic[V, D]):
                 return False
         return True
 
+    def backtracking_search(self, assignment: Dict[V, D] = {}) -> Optional[Dict[V, D]]:
+        if len(assignment) == len(self.variables):
+            return assignment
+
+        unassigned: List[V] = [v for v in self.variables if v not in assignment ]
+
+        first: V = unassigned[0]
+        for value in self.domains[first]:
+            local_assignment = assignment.copy()
+            local_assignment[first] = value
+            if self.consistent(first, local_assignment):
+                result: Optional[Dict[V, D]] = self.backtracking_search(local_assignment)
+                if result is not None:
+                    return result
+        return None
