@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: map_coloring.py
 #    Created:       <2020/10/16 14:06:13>
-#    Last Modified: <2020/10/18 12:58:50>
+#    Last Modified: <2020/10/18 13:00:44>
 
 from csp import Constraint, CSP
 from typing import Dict, List, Optional
@@ -37,3 +37,9 @@ if __name__ == "__main__":
     csp.add_constraint(MapColoringConstraint("Victoria", "South Australia"))
     csp.add_constraint(MapColoringConstraint("Victoria", "New South Wales"))
     csp.add_constraint(MapColoringConstraint("Victoria", "Tasmania"))
+
+    solution: Optional[Dict[str, str]] = csp.backtracking_search()
+    if solution is None:
+        print("No solution found!")
+    else:
+        print(solution)
