@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: map_coloring.py
 #    Created:       <2020/10/16 14:06:13>
-#    Last Modified: <2020/10/16 18:38:24>
+#    Last Modified: <2020/10/18 12:58:50>
 
 from csp import Constraint, CSP
 from typing import Dict, List, Optional
@@ -17,3 +17,23 @@ class MapColoringConstraint(Constraint[str, str]):
         if self.place1 not in assignment or self.place2 not in assignment:
             return True
         return assignment[self.place1] != assignment[self.place2]
+
+if __name__ == "__main__":
+    variables: List[str] = [
+        "Western Australia", "Northern Territory", "South Australia",
+        "Queensland", "New South Wales", "Victoria", "Tasmania"
+    ]
+    domains: Dict[str, List[str]] = {}
+    for variable in variables:
+        domains[variable] = ["red", "green", "blue"]
+    csp: CSP[str, str] = CSP(variables, domains)
+    csp.add_constraint(MapColoringConstraint("Western Australia", "Northern Territory"))
+    csp.add_constraint(MapColoringConstraint("Western Australia", "South Australia"))
+    csp.add_constraint(MapColoringConstraint("South Australia", "Northern Territory"))
+    csp.add_constraint(MapColoringConstraint("Queensland", "Northern Territory"))
+    csp.add_constraint(MapColoringConstraint("Queensland", "South Australia"))
+    csp.add_constraint(MapColoringConstraint("Queensland", "New South Wales"))
+    csp.add_constraint(MapColoringConstraint("New South Wales", "South Australia"))
+    csp.add_constraint(MapColoringConstraint("Victoria", "South Australia"))
+    csp.add_constraint(MapColoringConstraint("Victoria", "New South Wales"))
+    csp.add_constraint(MapColoringConstraint("Victoria", "Tasmania"))
