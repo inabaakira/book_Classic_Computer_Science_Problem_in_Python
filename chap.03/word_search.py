@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: word_search.py
 #    Created:       <2020/10/22 13:58:58>
-#    Last Modified: <2020/10/22 17:05:48>
+#    Last Modified: <2020/11/20 08:48:27>
 
 from typing import NamedTuple, List, Dict, Optional
 from random import choice
@@ -39,3 +39,12 @@ def generate_domain(word: str, grid: Grid) -> List[List[GridLocation]]:
             if col - length >= 0:
                 domain.append([GridLocation(r, col - (r - row)) for r in rows])
     return domain
+
+class WordSearchConstraint(Constraint[str, List[GridLocation]]):
+    def __init__(self, words: List[str]) -> None:
+        super().__init__(words)
+        self.words: List[str] = words
+
+    def satisfied(self, assignment: Dict[str, List[GridLocation]]) -> bool:
+        all_locations = [locs for values in assignment.values() for locs in values]
+        return len(set(all_locations)) == len(all_locations)
