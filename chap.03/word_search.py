@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: word_search.py
 #    Created:       <2020/10/22 13:58:58>
-#    Last Modified: <2020/11/20 08:48:27>
+#    Last Modified: <2020/11/23 14:53:48>
 
 from typing import NamedTuple, List, Dict, Optional
 from random import choice
@@ -49,3 +49,23 @@ class WordSearchConstraint(Constraint[str, List[GridLocation]]):
     def satisfied(self, assignment: Dict[str, List[GridLocation]]) -> bool:
         all_locations = [locs for values in assignment.values() for locs in values]
         return len(set(all_locations)) == len(all_locations)
+
+if __name__ == "__main__":
+    grid: Grid = generate_grid(9, 9)
+    words: List[str] = ["MATTHEW", "JOE", "MARY", "SARAH", "SALLY"]
+    locations: Dict[str, List[List[GridLocation]]] = {}
+    for word in words:
+        locations[word] = generate_domain(word, grid)
+    csp: CSP[str, List[GridLocation]] = CSP(words, locations)
+    csp.add_constraint(WordSearchConstraint(words))
+    solution: Optional[Dict[str, List[GridLocation]]] = csp.backtracking_search()
+    if solution is None:
+        print("No solution found!")
+    else:
+        for word, grid_locations in solution.items():
+            if choice([True, False]):
+                grid_locations.reverse()
+            for index, letter in enumerate(word):
+                (row, col) = (grid_locations[index].row, grid_locations[index].column)
+                grid[row][col] = letter
+        display_grid(grid)
