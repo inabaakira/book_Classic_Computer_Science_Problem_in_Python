@@ -28,16 +28,17 @@ def generate_domain(word: str, grid: Grid) -> List[List[GridLocation]]:
     width: int = len(grid[0])
     length: int = len(word)
     for row in range(height):
-        columns: range = range(col, col + length + 1)
-        rows: range = range(row, row + length + 1)
-        if col + length <= width:
-           domain.append([GridLocation(row, c) for c in columns])
-           if row + length <= height:
-               domain.append([GridLocation(r, col + (r - row)) for r in rows])
-        if row + length <= height:
-            domain.append([GridLocation(r, col) for r in rows])
-            if col - length >= 0:
-                domain.append([GridLocation(r, col - (r - row)) for r in rows])
+        for col in range(width):
+            columns: range = range(col, col + length + 1)
+            rows: range = range(row, row + length + 1)
+            if col + length <= width:
+                domain.append([GridLocation(row, c) for c in columns])
+                if row + length <= height:
+                    domain.append([GridLocation(r, col + (r - row)) for r in rows])
+            if row + length <= height:
+                domain.append([GridLocation(r, col) for r in rows])
+                if col - length >= 0:
+                    domain.append([GridLocation(r, col - (r - row)) for r in rows])
     return domain
 
 class WordSearchConstraint(Constraint[str, List[GridLocation]]):
