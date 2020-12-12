@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: word_search.py
 #    Created:       <2020/10/22 13:58:58>
-#    Last Modified: <2020/11/23 14:53:48>
+#    Last Modified: <2020/12/12 15:16:05>
 
 from typing import NamedTuple, List, Dict, Optional
 from random import choice
@@ -29,8 +29,10 @@ def generate_domain(word: str, grid: Grid) -> List[List[GridLocation]]:
     length: int = len(word)
     for row in range(height):
         for col in range(width):
-            columns: range = range(col, col + length + 1)
-            rows: range = range(row, row + length + 1)
+            # columns: range = range(col, col + length + 1)
+            # rows: range = range(row, row + length + 1)
+            columns: range = range(col, col + length)
+            rows: range = range(row, row + length)
             if col + length <= width:
                 domain.append([GridLocation(row, c) for c in columns])
                 if row + length <= height:
