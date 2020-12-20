@@ -12,7 +12,7 @@ class SendMoreMoneyConstraint(Constraint[str, int]):
         super().__init__(letters)
         self.letters: List[str] = letters
 
-    def satisified(self, assignment: Dict[str, int]) -> bool:
+    def satisfied(self, assignment: Dict[str, int]) -> bool:
         if len(set(assignment.values())) < len(assignment):
             return False
 
