@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: graph.py
 #    Created:       <2021/01/10 11:23:20>
-#    Last Modified: <2021/01/11 15:33:22>
+#    Last Modified: <2021/01/15 23:38:46>
 
 from typing import TypeVar, Generic, List, Optional
 from edge import Edge
@@ -36,12 +36,12 @@ class Graph(Generic[V]):
         edge: Edge = Edge(u, v)
         self.add_edge(edge)
 
-    def add_edge_by_vertices(sekf, first: V, second: V) -> None:
+    def add_edge_by_vertices(self, first: V, second: V) -> None:
         u: int = self._vertices.index(first)
         v: int = self._vertices.index(second)
         self.add_edge_by_indices(u, v)
 
-    def vertex_at(self, vertex: V) -> int:
+    def vertex_at(self, index: int) -> int:
         return self._vertices[index]
 
     def index_of(self, vertex: V) -> int:
@@ -62,5 +62,5 @@ class Graph(Generic[V]):
     def __str__(self) -> str:
         desc: str = ""
         for i in range(self.vertex_count):
-            desc += f"{self.vertex_at(i) -> {self.neighbors_for_index(i)}}\n"
+            desc += f"{self.vertex_at(i)} -> {self.neighbors_for_index(i)}\n"
         return desc

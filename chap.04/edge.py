@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: edge.py
 #    Created:       <2021/01/07 12:13:13>
-#    Last Modified: <2021/01/07 12:15:19>
+#    Last Modified: <2021/01/15 23:38:37>
 
 from __future__ import annotations
-from dataclasses import dataclasses
+from dataclasses import dataclass
 
 @dataclass
 class Edge:
