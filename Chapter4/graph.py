@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: graph.py
 #    Created:       <2021/01/10 11:23:20>
-#    Last Modified: <2021/01/15 23:41:12>
+#    Last Modified: <2021/01/18 15:13:59>
 
 from typing import TypeVar, Generic, List, Optional
 from edge import Edge
@@ -108,3 +108,18 @@ if __name__ == "__main__":
     city_graph.add_edge_by_vertices("New York", "Philadelphia")
     city_graph.add_edge_by_vertices("Philadelphia", "Washington")
     print(city_graph)
+
+    # chapter2 の BFS を city_graph に再利用する。
+    import sys
+    sys.path.insert(0, '..')
+    from Chapter2.generic_search import bfs, Node, node_to_path
+
+    bfs_result: Optional[Node[V]] = bfs("Boston",
+                                        lambda x: x == "Miami",
+                                        city_graph.neighbors_for_vertex)
+    if bfs_result is None:
+        print("No solution found using breadth-first search!")
+    else:
+        path: List[V] = node_to_path(bfs_result)
+        print("Path from Boston to Miami:")
+        print(path)
