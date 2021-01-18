@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: trivial_compression.py
 #    Created:       <2019/06/13 20:47:40>
-#    Last Modified: <2019/06/15 17:43:50>
+#    Last Modified: <2021/01/16 00:21:14>
 
 class CompressedGene:
     def __init__(self, gene: str) -> None:

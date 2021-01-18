@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: map_coloring.py
 #    Created:       <2020/10/16 14:06:13>
-#    Last Modified: <2020/10/18 13:00:44>
+#    Last Modified: <2021/01/16 00:22:42>
 
 from csp import Constraint, CSP
 from typing import Dict, List, Optional

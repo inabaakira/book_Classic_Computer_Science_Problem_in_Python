@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: queens.py
 #    Created:       <2020/10/20 15:21:49>
-#    Last Modified: <2020/10/20 17:14:23>
+#    Last Modified: <2021/01/16 00:23:05>
 
 from csp import Constraint, CSP
 from typing import Dict, List, Optional

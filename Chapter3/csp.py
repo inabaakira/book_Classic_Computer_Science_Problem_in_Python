@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: csp.py
 #    Created:       <2020/10/07 17:43:35>
-#    Last Modified: <2020/10/14 18:13:02>
+#    Last Modified: <2021/01/16 00:22:23>
 
 from typing import Generic, TypeVar, Dict, List, Optional
 from abc import ABC, abstractmethod

@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: send_more_money.py
 #    Created:       <2020/12/19 17:36:28>
-#    Last Modified: <2020/12/20 10:41:34>
+#    Last Modified: <2021/01/16 00:23:23>
 
 from csp import Constraint, CSP
 from typing import Dict, List, Optional

@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: missionaries.py
 #    Created:       <2020/01/06 15:27:01>
-#    Last Modified: <2020/01/06 18:19:20>
+#    Last Modified: <2021/01/16 00:21:52>
 
 from __future__ import annotations
 from typing import List, Optional

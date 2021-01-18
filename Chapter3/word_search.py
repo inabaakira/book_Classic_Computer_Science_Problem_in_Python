@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- mode: python; coding: utf-8 -*-
 # file: word_search.py
 #    Created:       <2020/10/22 13:58:58>
-#    Last Modified: <2020/12/12 15:16:05>
+#    Last Modified: <2021/01/16 00:23:37>
 
 from typing import NamedTuple, List, Dict, Optional
 from random import choice
