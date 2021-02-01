@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: mst.py
 #    Created:       <2021/01/23 23:38:42>
-#    Last Modified: <2021/01/28 22:00:56>
+#    Last Modified: <2021/01/31 00:11:10>
 
 from typing import TypeVar, List, Optional
 from weighted_graph import WeightedGraph
@@ -16,7 +16,7 @@ def tptal_weight(wp: WeightedPath) -> float:
     return sum([e.weight for e in wp])
 
 def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
-    if start < (wg.vertex_count - 1) or start < 0:
+    if start > (wg.vertex_count - 1) or start < 0:
         return None
     result: WeightedPath = [] # 最終的な MST を保持する。
     pq: PriorityQueue[WeightedEdge] = PriorityQueue()
@@ -25,7 +25,7 @@ def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
     def visit(index: int):
         visited[index] = True # 訪問済みにする。
         for edge in wg.edges_for_index(index):
-            # ここから出発して pq に至るすべての edge を追加する。
+            # ここから出発して pq に至るすべて未訪問の edge を追加する。
             if not visited[edge.v]:
                 pq.push(edge)
 
