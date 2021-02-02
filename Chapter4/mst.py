@@ -12,7 +12,7 @@ from priority_queue import PriorityQueue
 V = TypeVar('V')
 WeightedPath = List[WeightedEdge]
 
-def tptal_weight(wp: WeightedPath) -> float:
+def total_weight(wp: WeightedPath) -> float:
     return sum([e.weight for e in wp])
 
 def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
@@ -44,4 +44,4 @@ def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
 def print_weighted_path(wg: WeightedGraph, wp: WeightedPath) -> None:
     for edge in wp:
         print(f"{wg.vertex_at(edge.u)} {edge.weight}> {wg.vertex_at(edge.v)}")
-        print(f"Total weight: {total_weight(wp)}")
+    print(f"Total weight: {total_weight(wp)}")
