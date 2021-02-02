@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: mst.py
 #    Created:       <2021/01/23 23:38:42>
-#    Last Modified: <2021/02/01 18:37:33>
+#    Last Modified: <2021/02/01 18:53:34>
 
 from typing import TypeVar, List, Optional
 from weighted_graph import WeightedGraph
@@ -35,7 +35,7 @@ def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
         edge = pq.pop()
         if visited[edge.v]:
             continue # 再訪しない。
-        # これが今の最少なので、解に加える。
+        # これが今の最小なので、解に加える。
         result.append(edge)
         visit(edge.v) # ここにつながっているところに訪問する。
 
