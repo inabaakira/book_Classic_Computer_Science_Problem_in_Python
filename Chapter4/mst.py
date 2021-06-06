@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: mst.py
 #    Created:       <2021/01/23 23:38:42>
-#    Last Modified: <2021/02/02 23:21:57>
+#    Last Modified: <2021/06/06 13:21:45>
 
 from typing import TypeVar, List, Optional
 from weighted_graph import WeightedGraph
@@ -48,17 +48,17 @@ def print_weighted_path(wg: WeightedGraph, wp: WeightedPath) -> None:
 
 if __name__ == "__main__":
     city_graph2: WeightedGraph[str] = WeightedGraph([
-        "Seattle", "San Francisco", "Los Angels", "Riverside",    "Phoenix",
-        "Chicago", "Boston",        "New York",   "Atlanta",      "Miami",
-        "Dallas",  "Houston",       "Detroit",    "Philadelphia", "Washington"
+        "Seattle", "San Francisco", "Los Angeles", "Riverside",    "Phoenix",
+        "Chicago", "Boston",        "New York",    "Atlanta",      "Miami",
+        "Dallas",  "Houston",       "Detroit",     "Philadelphia", "Washington"
     ])
 
     city_graph2.add_edge_by_vertices("Seattle",       "Chicago",       1737)
     city_graph2.add_edge_by_vertices("Seattle",       "San Francisco",  678)
     city_graph2.add_edge_by_vertices("San Francisco", "Riverside",      386)
-    city_graph2.add_edge_by_vertices("San Francisco", "Los Angels",     348)
-    city_graph2.add_edge_by_vertices("Los Angels",    "Riverside",       50)
-    city_graph2.add_edge_by_vertices("Los Angels",    "Phoenix",        357)
+    city_graph2.add_edge_by_vertices("San Francisco", "Los Angeles",    348)
+    city_graph2.add_edge_by_vertices("Los Angeles",   "Riverside",       50)
+    city_graph2.add_edge_by_vertices("Los Angeles",   "Phoenix",        357)
     city_graph2.add_edge_by_vertices("Riverside",     "Phoenix",        307)
     city_graph2.add_edge_by_vertices("Riverside",     "Chicago",       1704)
     city_graph2.add_edge_by_vertices("Phoenix",       "Dallas",         887)

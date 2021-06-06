@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: graph.py
 #    Created:       <2021/01/10 11:23:20>
-#    Last Modified: <2021/01/18 15:13:59>
+#    Last Modified: <2021/06/06 13:19:32>
 
 from typing import TypeVar, Generic, List, Optional
 from edge import Edge
@@ -68,7 +68,7 @@ class Graph(Generic[V]):
 if __name__ == "__main__":
     city_graph: Graph[str] = Graph(["Seattle",
                                     "San Francisco",
-                                    "Los Angels",
+                                    "Los Angeles",
                                     "Riverside",
                                     "Phoenix",
                                     "Chicago",
@@ -84,9 +84,9 @@ if __name__ == "__main__":
     city_graph.add_edge_by_vertices("Seattle", "Chicago")
     city_graph.add_edge_by_vertices("Seattle", "San Francisco")
     city_graph.add_edge_by_vertices("San Francisco", "Riverside")
-    city_graph.add_edge_by_vertices("San Francisco", "Los Angels")
-    city_graph.add_edge_by_vertices("Los Angels", "Riverside")
-    city_graph.add_edge_by_vertices("Los Angels", "Phoenix")
+    city_graph.add_edge_by_vertices("San Francisco", "Los Angeles")
+    city_graph.add_edge_by_vertices("Los Angeles", "Riverside")
+    city_graph.add_edge_by_vertices("Los Angeles", "Phoenix")
     city_graph.add_edge_by_vertices("Riverside", "Phoenix")
     city_graph.add_edge_by_vertices("Riverside", "Chicago")
     city_graph.add_edge_by_vertices("Phoenix", "Dallas")
