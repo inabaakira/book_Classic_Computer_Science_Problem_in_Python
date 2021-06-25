@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: genetic_algorithm.py
 #    Created:       <2021/06/22 11:12:37>
-#    Last Modified: <2021/06/22 16:49:50>
+#    Last Modified: <2021/06/25 23:21:42>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Tuple, Callable
@@ -36,3 +36,8 @@ class GenericAlgorithm(Generic[C]):
     # 注意: fitness の負の結果に対しては動作しない．
     def _pick_roulette(self, wheel: List[float]) -> Tuple[C, C]:
         return tuple(choices(self._population, weight=wheel, k=2))
+
+    # num_participants 個をランダムに選び，その中から最もよい 2 個を取る
+    def _pick_tournament(self, num_participants: int) -> Tuple[C, C]:
+        participants: List[C] = choices(self._popilation, k=num_participants)
+        return tuple(nlargest(2, participants, key=self._fitness_key))
