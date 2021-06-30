@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: genetic_algorithm.py
 #    Created:       <2021/06/22 11:12:37>
-#    Last Modified: <2021/06/30 14:14:51>
+#    Last Modified: <2021/06/30 14:43:09>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Tuple, Callable
@@ -39,7 +39,7 @@ class GenericAlgorithm(Generic[C]):
 
     # num_participants 個をランダムに選び，その中から最もよい 2 個を取る
     def _pick_tournament(self, num_participants: int) -> Tuple[C, C]:
-        participants: List[C] = choices(self._popilation, k=num_participants)
+        participants: List[C] = choices(self._population, k=num_participants)
         return tuple(nlargest(2, participants, key=self._fitness_key))
 
     # population を新世代の個体と取り替える．
@@ -67,3 +67,19 @@ class GenericAlgorithm(Generic[C]):
         for individual in self._population:
             if random() < self._mutation_chance:
                 individual.mutate()
+
+
+    # max_generations 回遺伝的アルゴリズムを実行し，見つかった最良の個体を返す．
+    def run(self) -> C:
+        best: C = max(self._population, key=self._fitness_key)
+        for generation in range(self._max_generations):
+            # 閾値を超えたら終了する．
+            if best.fitness() >= self._threshold:
+                return best
+            print(f"Generation {generation} Best {best.fitness()} Avg{mean(map(self._fitness_key, self._population))}")
+            self._reproduce_and_replace()
+            self._mutate()
+            highest: C = max(self._population, key=self._fitness_key)
+            if highest.fitness() > best.fitness():
+                best = highest # より良い個体を見つけた．
+        return best # _max_generations 回で見つかった最良の個体．
