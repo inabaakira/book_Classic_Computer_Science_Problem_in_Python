@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: genetic_algorithm.py
 #    Created:       <2021/06/22 11:12:37>
-#    Last Modified: <2021/06/28 17:05:45>
+#    Last Modified: <2021/06/30 14:14:51>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Tuple, Callable
@@ -61,3 +61,9 @@ class GenericAlgorithm(Generic[C]):
         if len(new_population) > len(self._population):
             new_population.pop()
         self._population = new_population
+
+    # _mutation_chance の確率で各個体が突然変異する．
+    def _mutate(self) -> None:
+        for individual in self._population:
+            if random() < self._mutation_chance:
+                individual.mutate()
