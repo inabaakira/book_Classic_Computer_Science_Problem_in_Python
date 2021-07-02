@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: genetic_algorithm.py
 #    Created:       <2021/06/22 11:12:37>
-#    Last Modified: <2021/06/30 14:43:09>
+#    Last Modified: <2021/07/02 22:43:28>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Tuple, Callable
@@ -14,7 +14,7 @@ from chromosome import Chromosome
 
 C = TypeVar('C', bound=Chromosome)
 
-class GenericAlgorithm(Generic[C]):
+class GeneticAlgorithm(Generic[C]):
     SelectionType = Enum("SelectionType", "ROULETTE TOURNAMENT")
 
     def __init__(self,
@@ -23,7 +23,7 @@ class GenericAlgorithm(Generic[C]):
                  max_generations: int = 100,
                  mutation_chance: float = 0.01,
                  crossover_chance: float = 0.7,
-                 selection_type: SelectionType.TOURNAMENT) -> None:
+                 selection_type: SelectionType = SelectionType.TOURNAMENT) -> None:
         self._population: List[C] = initial_population
         self._threshold: float = threshold
         self._max_generations: int = max_generations
@@ -48,15 +48,15 @@ class GenericAlgorithm(Generic[C]):
         # 新世代で置き換え尽くすまで続ける．
         while len(new_population) < len(self._population):
             # 親を 2 つ選ぶ。
-            if self._selection_type == GeneticAlgorithm.Selection.ROULETTE:
+            if self._selection_type == GeneticAlgorithm.SelectionType.ROULETTE:
                 parents: Tuple[C, C] = self._pick_roulette([x.fitness() for x in self._population])
             else:
-                parents: self._pick_tournament(len(self._population) // 2)
+                parents = self._pick_tournament(len(self._population) // 2)
             # 2 つの親が組替えを起こす場合を想定した処理。
-            if random() < self.crossover_chance:
+            if random() < self._crossover_chance:
                 new_population.extend(parents[0].crossover(parents[1]))
             else:
-                nre_population.extend(parents)
+                new_population.extend(parents)
         # 新世代の個体が奇数の場合、余計な 1 個が含まれているのでそれを削除する。
         if len(new_population) > len(self._population):
             new_population.pop()
