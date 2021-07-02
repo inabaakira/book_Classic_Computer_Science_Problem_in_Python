@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: simple_equation.py
 #    Created:       <2021/06/30 14:58:25>
-#    Last Modified: <2021/07/01 09:45:19>
+#    Last Modified: <2021/07/02 22:27:39>
 
 from __future__ import annotations
 from typing import Tuple, List
@@ -44,3 +44,13 @@ class SimpleEquation(Chromosome):
 
     def __str__(self) -> str:
         return f"X: {self.x} Y: {self.y} Fitness: {self.fitness()}"
+
+if __name__ == "__main__":
+    initial_population: List[SimpleEquation] = \
+        [SimpleEquation.random_instance() for _ in range(20)]
+    ga: GeneticAlgorithm[SimpleEquation] = \
+        GeneticAlgorithm(initial_population=initial_population,
+                         threshold=13.0, max_generations = 100,
+                         mutation_chance = 0.1, crossover_chance = 0.7)
+    result: SimpleEquation = ga.run()
+    print(result)
