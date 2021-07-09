@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: send_more_money2.py
 #    Created:       <2021/07/03 00:02:20>
-#    Last Modified: <2021/07/09 17:44:39>
+#    Last Modified: <2021/07/09 17:51:12>
 
 from __future__ import annotations
 from typing import Tuple, List
@@ -61,7 +61,7 @@ class SendMoreMoney2(Chromosome):
         m: int = self.letters.index("M")
         o: int = self.letters.index("O")
         r: int = self.letters.index("R")
-        Y: int = self.letters.index("Y")
+        y: int = self.letters.index("Y")
         send: int = s * 1000 + e * 100 + n * 10 + d
         more: int = m * 1000 + o * 100 + r * 10 + e
         money: int = m * 10000 + o * 1000 + n * 100 + e * 10 + y
