@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: send_more_money2.py
 #    Created:       <2021/07/03 00:02:20>
-#    Last Modified: <2021/07/03 11:39:08>
+#    Last Modified: <2021/07/09 17:44:39>
 
 from __future__ import annotations
 from typing import Tuple, List
@@ -67,3 +67,16 @@ class SendMoreMoney2(Chromosome):
         money: int = m * 10000 + o * 1000 + n * 100 + e * 10 + y
         difference: int = abs(money - (send + more))
         return f"{send} + {more} = {money} Difference: {difference}"
+
+if __name__ == "__main__":
+    initial_population: List[SendMoreMoney2] \
+        = [SendMoreMoney2.random_instance() for _ in range(1000)]
+    ga: GeneticAlgorithm[SendMoreMoney2] \
+        = GeneticAlgorithm(initial_population = initial_population,
+                           threshold = 1.0,
+                           max_generations = 1000,
+                           mutation_chance = 0.2,
+                           crossover_chance = 0.7,
+                           selection_type = GeneticAlgorithm.SelectionType.ROULETTE)
+    result: SendMoreMoney2 = ga.run()
+    print(result)
