@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/07/20 12:16:07>
+#    Last Modified: <2021/07/31 18:13:31>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -19,3 +19,11 @@ def zscores(original: Sequence[float]) -> List[float]:
     if std == 0: # 分散がなければ全てに対して 0 を返す
         return [0] * len(original)
     return [(x - avg) / std for x in original]
+
+Point = TypeVar('Point', bound=DataPoint)
+
+class KMeans(Generic[Point]):
+    @dataclass
+    class Cluster:
+        points: List[Point]
+        centroid: DataPoint
