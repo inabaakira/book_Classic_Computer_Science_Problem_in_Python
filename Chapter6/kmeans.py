@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/07/31 23:14:50>
+#    Last Modified: <2021/08/01 16:37:33>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -43,3 +43,6 @@ class KMeans(Generic[Point]):
     @property
     def _centroids(self) -> List[DataPoint]:
         return [x.centroid for x in self._clusters]
+
+    def _dimension_slice(self, dimension: int) -> List[float]:
+        return [x.dimensions[dimension] for x in self._points]
