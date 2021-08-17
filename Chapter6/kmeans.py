@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/08/17 21:31:04>
+#    Last Modified: <2021/08/17 23:35:03>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -63,3 +63,13 @@ class KMeans(Generic[Point]):
             rand_value: float = uniform(min(values), max(values))
             rand_dimensions.append(rand_value)
         return DataPoint(rand_dimensions)
+
+    # 各 point に最も近い cluster の centroid を発見し，
+    # その point を該当の cluster に登録する．
+    def _assign_clusters(self) -> None:
+        for point in self._points:
+            closest: DataPoint = min(self._centroids,
+                                     key = partial(DataPoint.distance, point))
+            idx: int = self._centroids.index(closest)
+            cluster: KMeans.Cluster = self._clusters[idx]
+            cluster.points.append(point)
