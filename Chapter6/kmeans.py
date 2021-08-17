@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/08/09 10:27:11>
+#    Last Modified: <2021/08/17 21:31:04>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -55,3 +55,11 @@ class KMeans(Generic[Point]):
                 zscored[index].append(zscore)
         for i in range(len(self._points)):
             self._points[i].dimensions = tuple(zscored[i])
+
+    def _random_point(self) -> DataPoint:
+        rand_dimensions: List[float] = []
+        for dimension in range(self._points[0].num_dimensions):
+            values: List[float] = self._dimension_slice(dimension)
+            rand_value: float = uniform(min(values), max(values))
+            rand_dimensions.append(rand_value)
+        return DataPoint(rand_dimensions)
