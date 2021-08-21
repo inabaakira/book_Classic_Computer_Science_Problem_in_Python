@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/08/17 23:35:03>
+#    Last Modified: <2021/08/20 14:25:13>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -73,3 +73,15 @@ class KMeans(Generic[Point]):
             idx: int = self._centroids.index(closest)
             cluster: KMeans.Cluster = self._clusters[idx]
             cluster.points.append(point)
+
+    # 各 cluster の center を見つけ、centroid をそこに移動する。
+    def _generate_centroid(self) -> None:
+        for cluster in self._clusters:
+            if len(cluster.points) == 0: # points が無ければ centroid はそのまま
+                continue
+            means: List[float] = []
+            for dimension in range(cluster.points[0].num_dimensions):
+                dimension_slice: List[float] = \
+                    [p.dimensions[dimension] for p in cluster.points]
+                means.append(mean(dimension_slice))
+            cluster.centroid = DataPoint(means)
