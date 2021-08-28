@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/08/20 14:25:13>
+#    Last Modified: <2021/08/28 14:47:01>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -28,7 +28,7 @@ class KMeans(Generic[Point]):
         points: List[Point]
         centroid: DataPoint
 
-    def __init__(self, k: int, point: List[Point]) -> None:
+    def __init__(self, k: int, points: List[Point]) -> None:
         if k < 1: # 負またはゼロ個の cluster に対して k-means は考えられない
             raise ValueError("k must be >= 1")
         self._points: List[Point] = points
@@ -74,7 +74,7 @@ class KMeans(Generic[Point]):
             cluster: KMeans.Cluster = self._clusters[idx]
             cluster.points.append(point)
 
-    # 各 cluster の center を見つけ、centroid をそこに移動する。
+    # 各 cluster の center を見つけ，centroid をそこに移動する．
     def _generate_centroid(self) -> None:
         for cluster in self._clusters:
             if len(cluster.points) == 0: # points が無ければ centroid はそのまま
