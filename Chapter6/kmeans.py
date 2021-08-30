@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: kmeans.py
 #    Created:       <2021/07/20 12:12:14>
-#    Last Modified: <2021/08/28 14:47:01>
+#    Last Modified: <2021/08/30 15:09:30>
 
 from __future__ import annotations
 from typing import TypeVar, Generic, List, Sequence
@@ -75,7 +75,7 @@ class KMeans(Generic[Point]):
             cluster.points.append(point)
 
     # 各 cluster の center を見つけ，centroid をそこに移動する．
-    def _generate_centroid(self) -> None:
+    def _generate_centroids(self) -> None:
         for cluster in self._clusters:
             if len(cluster.points) == 0: # points が無ければ centroid はそのまま
                 continue
@@ -91,14 +91,14 @@ class KMeans(Generic[Point]):
             # 全ての cluster をクリアする．
             for cluster in self._clusters:
                 cluster.points.clear()
-                # 各 point が最も近い cluster を見つけてそこに登録する．
-                self._assign_clusters()
-                old_centroids: List[DataPoint] = deepcopy(self._centroids) # 現在を保存する．
-                self._generate_centroid() # 新しい centroids を見つける．
-                if old_centroids == self._centroids: # centroids が変わらない場合
-                    print(f"Converged after {iteration} iterations")
-                    return self._clusters
-            return self._clusters
+            # 各 point が最も近い cluster を見つけてそこに登録する．
+            self._assign_clusters()
+            old_centroids: List[DataPoint] = deepcopy(self._centroids) # 現在を保存する．
+            self._generate_centroids() # 新しい centroids を見つける．
+            if old_centroids == self._centroids: # centroids が変わらない場合
+                print(f"Converged after {iteration} iterations")
+                return self._clusters
+        return self._clusters
 
 
 if __name__ == "__main__":
