@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: governors.py
 #    Created:       <2021/08/30 11:25:14>
-#    Last Modified: <2021/08/30 11:45:22>
+#    Last Modified: <2021/08/30 11:49:35>
 
 from __future__ import annotations
 from typing import List
@@ -72,3 +72,8 @@ if __name__  == "__main__":
         Governor(-89.616508, 49, "Wisconsin"),
         Governor(-107.30249, 55, "Wyoming")
     ]
+
+    kmeans: KMeans[Governor] = KMeans(2, governors)
+    gov_clusters: List[KMeans.Cluster] = kmeans.run()
+    for index, cluster in enumerate(gov_clusters):
+        print(f"Cluster {index}: {cluster.points}\n")
