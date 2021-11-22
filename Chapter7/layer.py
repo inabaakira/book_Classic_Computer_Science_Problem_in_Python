@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: layer.py
 #    Created:       <2021/11/22 17:12:13>
-#    Last Modified: <2021/11/22 17:45:58>
+#    Last Modified: <2021/11/22 23:24:55>
 
 from __future__ import annotations
 from typing import List, Callable, Optional
@@ -32,3 +32,9 @@ class Layer:
             self.neurons.append(neuron)
         self.output_cache: List[float] = [0.0 for _ in range(num_neurons)]
 
+    def outputs(self, inputs: List[float]) -> List[float]:
+        if self.previous_layer is None:
+            self.output_cache = inputs
+        else:
+            self.output_cache = [n.output(inputs) for n in self.neurons]
+        return self.output_cache
