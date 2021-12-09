@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: network.py
 #    Created:       <2021/12/06 11:03:00>
-#    Last Modified: <2021/12/06 11:33:53>
+#    Last Modified: <2021/12/06 22:12:45>
 
 from __future__ import anootations
 from typing import List, Callable, TypeVar, Tuple
@@ -37,3 +37,8 @@ class Network:
                                activation_function,
                                derivative_activation_function)
             self.leyers.append(next_layer)
+
+    # 入力値を first layer に与えると first layer の出力は second layer の入力に，
+    # second layer の出力は third layer の入力となる．その後も同様．
+    def outputs(self, input: List[float]) -> List[float]:
+        return reduce(lambda inputs, layer: layer.outputs(inputs), self.layers, input)
