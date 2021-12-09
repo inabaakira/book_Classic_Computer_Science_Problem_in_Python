@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: network.py
 #    Created:       <2021/12/06 11:03:00>
-#    Last Modified: <2021/12/06 22:12:45>
+#    Last Modified: <2021/12/09 11:57:15>
 
 from __future__ import anootations
 from typing import List, Callable, TypeVar, Tuple
@@ -42,3 +42,13 @@ class Network:
     # second layer の出力は third layer の入力となる．その後も同様．
     def outputs(self, input: List[float]) -> List[float]:
         return reduce(lambda inputs, layer: layer.outputs(inputs), self.layers, input)
+
+
+    # 実際の出力と予測値との誤差から各 neuron での変化を計算する
+    def backpropagate(self, expected: List[float]) -> None:
+        # output layer neuron に対して delta を計算する
+        last_layer: int = len(self.layers) - 1
+        self.layers[last_layer].calculate_deltas_for_output_layer(expected)
+        # hidden layers に対する delta を後ろから計算する
+        for l in range(last_layer - 1, 0, 1):
+            self.layers[l].calculate_deltas_for_hidden_layer(self.layers[l + 1])
