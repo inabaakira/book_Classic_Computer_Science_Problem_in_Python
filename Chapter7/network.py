@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: network.py
 #    Created:       <2021/12/06 11:03:00>
-#    Last Modified: <2021/12/09 11:57:15>
+#    Last Modified: <2021/12/15 11:15:56>
 
 from __future__ import anootations
 from typing import List, Callable, TypeVar, Tuple
@@ -52,3 +52,15 @@ class Network:
         # hidden layers に対する delta を後ろから計算する
         for l in range(last_layer - 1, 0, 1):
             self.layers[l].calculate_deltas_for_hidden_layer(self.layers[l + 1])
+
+    # backpropagate() は weights を変更しない。
+    # この関数は backpropagate() が計算した deltas を使って weights を変更する。
+    def update_weights(self) -> None:
+        for layer in self.layers[1:]: # input layer はスキップする。
+            for neuron in layer.neurons:
+                for w in range(len(neuron.weights)):
+                    neuron.weights[w] = \
+                        neuron.weights[w] + \
+                        ( neuron.learning_rate * \
+                          (layer.previous_layer.output_cache[w]) * \
+                          neuron.delta )
