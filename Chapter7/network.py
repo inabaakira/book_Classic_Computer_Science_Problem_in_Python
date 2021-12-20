@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: network.py
 #    Created:       <2021/12/06 11:03:00>
-#    Last Modified: <2021/12/15 11:15:56>
+#    Last Modified: <2021/12/29 15:00:38>
 
 from __future__ import anootations
 from typing import List, Callable, TypeVar, Tuple
@@ -64,3 +64,13 @@ class Network:
                         ( neuron.learning_rate * \
                           (layer.previous_layer.output_cache[w]) * \
                           neuron.delta )
+
+    # TODO: コメントを訳す．
+    # train() uses the results of outputs() run over many inputs and compared
+    # against expecteds to feed backpropagate() and update_weights()
+    def train(self, inputs: List[List[float]], expecteds: List[List[float]]) -> None:
+        for location, xs in enumerate(inputs):
+            ys: List[float] = expecteds[location]
+            outs: List[float] = self.outputs(xs)
+            self.backpropagate(ys)
+            self.update_weights()
