@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: network.py
 #    Created:       <2021/12/06 11:03:00>
-#    Last Modified: <2021/12/29 15:00:38>
+#    Last Modified: <2021/12/31 13:59:32>
 
 from __future__ import anootations
 from typing import List, Callable, TypeVar, Tuple
@@ -74,3 +74,17 @@ class Network:
             outs: List[float] = self.outputs(xs)
             self.backpropagate(ys)
             self.update_weights()
+
+    # classification に必要な，一般化された結果用に
+    # この関数は正しい結果を出した検定の回数と全体数に対する正しい結果の割合を返す．
+    def validate(self,
+                 inputs: List[List[float]],
+                 expecteds: List[T],
+                 interpret_output: Callable[[List[float]], T]) -> Tuple[int, int, float]:
+        correct: int = 0
+        for input, expected in zip(inputs, expecteds):
+            result: T = interpret_output(self.outputs(input))
+            if result == expected:
+                correct += 1
+        percentage: float = correct / len(inputs)
+        return correct, len(inputs), percentage
