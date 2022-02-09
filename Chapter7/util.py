@@ -4,7 +4,7 @@
 #    Created:       <2021/10/28 14:21:30>
 #    Last Modified: <2021/10/29 10:01:22>
 
-from typing import list
+from typing import List
 from math import exp
 
 # 2つのベクトルのドット積
@@ -23,9 +23,9 @@ def derivative_sigmoid(x: float) -> float:
 # and feature scale each column to be in the range 0 - 1
 def normalize_by_feature_scaling(dataset: List[List[float]]) -> None:
     for col_num in range(len(dataset[0])):
-        column: List[float] = [row[col_num] for row in datase]
+        column: List[float] = [row[col_num] for row in dataset]
         maximum = max(column)
         minimum = min(column)
         for row_num in range(len(dataset)):
             dataset[row_num][col_num] = \
-                (dataset[row_num][col_num] - minumum) / (maximum - minimum)
+                (dataset[row_num][col_num] - minimum) / (maximum - minimum)
