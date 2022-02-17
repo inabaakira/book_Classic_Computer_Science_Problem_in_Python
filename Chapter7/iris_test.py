@@ -18,7 +18,7 @@ if __name__ == "__main__":
             if species == "Iris-setosa":
                 iris_classifications.append([1.0, 0.0, 0.0])
             elif species == "Iris-versicolor":
-                iris_classifications.append([0.0, 1.0, 1.0])
+                iris_classifications.append([0.0, 1.0, 0.0])
             else:
                 iris_classifications.append([0.0, 0.0, 1.0])
             iris_species.append(species)
