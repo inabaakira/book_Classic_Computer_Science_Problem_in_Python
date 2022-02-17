@@ -23,3 +23,5 @@ if __name__ == "__main__":
                 iris_classifications.append([0.0, 0.0, 1.0])
             iris_species.append(species)
     normalize_by_feature_scaling(iris_parameters)
+
+    iris_network: Network = Network([4, 6, 3], 0.3)
