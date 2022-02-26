@@ -4,7 +4,7 @@
 #    Created:       <2021/12/06 11:03:00>
 #    Last Modified: <2021/12/31 13:59:32>
 
-from __future__ import anootations
+from __future__ import annotations
 from typing import List, Callable, TypeVar, Tuple
 from functools import reduce
 from layer import Layer
@@ -31,12 +31,12 @@ class Network:
         self.layers.append(input_layer)
         # hidden layer and output layer
         for previous, num_neurons in enumerate(layer_structure[1::]):
-            next_layer = Layer(self.leyers[previous],
+            next_layer = Layer(self.layers[previous],
                                num_neurons,
                                learning_rate,
                                activation_function,
                                derivative_activation_function)
-            self.leyers.append(next_layer)
+            self.layers.append(next_layer)
 
     # 入力値を first layer に与えると first layer の出力は second layer の入力に，
     # second layer の出力は third layer の入力となる．その後も同様．

@@ -43,5 +43,5 @@ if __name__ == "__main__":
     # test over the last 10 of the irises in the data set
     iris_testers: List[List[float]] = iris_parameters[140:150]
     iris_testers_corrects: List[str] = iris_species[140:150]
-    iris_result = iris_network.validate(iris_testers, iris_testers_corrects, iris_interpert_output)
+    iris_results = iris_network.validate(iris_testers, iris_testers_corrects, iris_interpret_output)
     print(f"{iris_results[0]} correct of {iris_results[1]} = {iris_results[2] * 100}%")
