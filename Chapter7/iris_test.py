@@ -33,3 +33,9 @@ if __name__ == "__main__":
             return "Iris-versicolor"
         else:
             return "Iris-virginica"
+
+    # train over the first 140 irises in the data set 50 times
+    iris_trainers: List[List[float]] = iris_parameters[0:140]
+    iris_trainers_corrects: List[List[float]] = iris_classifications[0:140]
+    for _ in range(50):
+        iris_network.train(iris_trainers, iris_trainers_corrects)
