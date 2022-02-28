@@ -25,3 +25,11 @@ if __name__ == "__main__":
     normalize_by_feature_scaling(wine_parameters)
 
     wine_network: Network = Network([13, 7, 3], 0.9)
+
+    def wine_interpret_output(output: List[float]) -> int:
+        if max(output) == output[0]:
+            return 1
+        elif max(output) == output[1]:
+            return 2
+        else:
+            return 3
